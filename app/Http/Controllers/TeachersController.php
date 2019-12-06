@@ -50,13 +50,14 @@ class TeachersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
+        // 'avatar' => 'sometimes|file|image|nullable|max:1999',
         $validator = Validator::make($request->all(), [
             'firstname' => 'required|string|max:190',
             'lastname' => 'required|string|max:190',
             'birthdate' => 'required|date',
             'country' => 'required|integer',
-            'avatar' => 'sometimes|file|image|nullable|max:1999',
+            
         ]);
 
         if ($validator->fails()) {
@@ -65,10 +66,13 @@ class TeachersController extends Controller
                         ->withInput();
         }
 
-        $teachers_profile = TeachersProfile::getTeachersProfileByid(auth()->user()->id)->first();            
-        $filename = $teachers_profile->avatar;
-        if($teachers_profile->avatar != 'default.png') { 
-            Storage::delete('storage/avatar/' . $teachers_profile->avatar);
+           
+        $teachers_profile = TeachersProfile::getTeachersProfileByid(auth()->user()->id)->first();      
+        if (!empty($teachers_profile)) {
+            $filename = $teachers_profile->avatar;
+            if($teachers_profile->avatar != 'default.png') { 
+                Storage::delete('storage/avatar/' . $teachers_profile->avatar);
+            }
         }
 
         if($request->hasFile('avatar')) {
