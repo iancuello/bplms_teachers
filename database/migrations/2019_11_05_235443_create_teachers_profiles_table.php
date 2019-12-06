@@ -28,7 +28,7 @@ class CreateTeachersProfilesTable extends Migration
 
             $table->date('birthdate')->nullable();
             $table->string('address')->nullable();
-            $table->integer('countryid');
+            $table->integer('countryid')->default(0);
             $table->string('contactno')->nullable();
             $table->string('avatar')->nullable();
             

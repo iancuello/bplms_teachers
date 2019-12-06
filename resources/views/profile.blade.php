@@ -882,7 +882,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <div class="col-lg-4 col-md-9 col-sm-12">
                                         <div class="kt-avatar kt-avatar--outline kt-avatar--circle" id="kt_apps_user_add_avatar">
                                             <div class="kt-avatar__holder" style="background-image: url(&quot;/storage/avatar/{{!empty($teachers_profile) ? $teachers_profile->avatar : 'default.png' }}&quot;);"></div>
-                                            {{-- <div class="kt-avatar__holder" style="background-image: url(&quot;http://keenthemes.com/metronic/preview/default/custom/user/assets/media/users/100_2.jpg&quot;);"></div> --}}
+                                            <!-- <div class="kt-avatar__holder" style="background-image: url(&quot;http://keenthemes.com/metronic/preview/default/custom/user/assets/media/users/100_2.jpg&quot;);"></div>  -->
                                             <label class="kt-avatar__upload" data-toggle="kt-tooltip" title="" data-original-title="Change avatar">
                                                 <i class="fa fa-pen"></i>
                                                 <input type="file" name="avatar" id="avatar" accept=".png, .jpg, .jpeg">
@@ -986,18 +986,19 @@ License: You must have a valid license purchased only from themeforest(the above
                                     </div>
                                 </div>
                                     
-                                <div class="form-group row">
+                                 <div class="form-group row">
                                         <label class="col-form-label col-lg-3 col-sm-12">Country</label>
                                         <div class="col-lg-4 col-md-9 col-sm-12">
-                                            {{-- <select class="form-control kt-selectpicker" 
-                                                name="country" id="country" data-size="7" data-live-search="true">     
-                                                <select class="form-control is-invalid kt-selectpicker">                                        --}}
                                             <select name="country" id="country" data-size="7" data-live-search="true"
                                                     class="{{ $errors->has('country') ? 'form-control is-invalid kt-selectpicker' : 'form-control kt-selectpicker'}}">    
 
                                                     <option value="">Select</option>
                                                     @foreach($countries as $country)
-                                                        <option value="{{$country->countries_id}}" {{$teachers_profile->countryid == $country->countries_id ? '  selected="selected"' : '' }}>{{$country->countries_name}}</option>
+                                                        @if (!empty($teachers_profile)) 
+                                                            <option value="{{$country->id}}" {{$teachers_profile->countryid == $country->id ? '  selected="selected"' : '' }}>{{$country->name}}</option>
+                                                        @else
+                                                            <option value="{{$country->id}}">{{$country->name}}</option>
+                                                        @endif
                                                     @endforeach
 
                                             </select>

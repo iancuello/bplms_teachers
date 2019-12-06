@@ -26,7 +26,8 @@ class TeachersController extends Controller
         //return view('profile', compact('countries'));   
         //dd($id);
 
-        $countries = Country::OrderByName()->get();                
+        $countries = Country::OrderByName()->get();      
+                  
         $teachers_profile = TeachersProfile::getTeachersProfileByid(auth()->user()->id)->first();           
         //dd($teachers_profile);     
         return view('profile', compact('countries', 'teachers_profile'));  

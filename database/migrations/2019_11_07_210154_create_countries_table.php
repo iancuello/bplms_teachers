@@ -14,9 +14,9 @@ class CreateCountriesTable extends Migration
     public function up()
     {
         Schema::create('countries', function (Blueprint $table) {
-            $table->increments('countries_id');
-            $table->string('countries_code');
-			$table->string('countries_name');
+            $table->increments('id');
+            $table->string('code');
+			$table->string('name');
             //$table->string('countries_isd');
             $table->timestamps();
         });

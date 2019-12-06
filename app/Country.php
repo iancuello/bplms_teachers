@@ -10,6 +10,6 @@ class Country extends Model
 
     public function scopeOrderByName($query)
     {
-        return $query->orderBy('countries_name', 'asc');
+        return $query->orderBy('name', 'asc');
     }
 }
