@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\personalinfo;
 
 use Illuminate\Http\Request;
-use App\User;
+use App\Http\Controllers\Controller;
 
 class ChangePasswordController extends Controller
 {
@@ -14,9 +14,7 @@ class ChangePasswordController extends Controller
      */
     public function index()
     {
-        //$countries = Country::OrderByName()->get();                
-        //$teachers_profile = TeachersProfile::getTeachersProfileByid(auth()->user()->id)->first();           
-        return view('changepassword', compact('countries', 'teachers_profile'));  
+        return view('personalinfo.changepassword', compact('countries', 'teachers_profile'));  
     }
 
     /**
