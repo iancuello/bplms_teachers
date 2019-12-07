@@ -22,7 +22,8 @@ Route::get('/', function () {
 Route::get('/profile', 'PersonalInfo\ProfileController@index');
 Route::post('/profile', 'PersonalInfo\ProfileController@store');
 
-Route::get('/changepassword', 'PersonalInfo\ChangePasswordController@index');
+//Route::get('/changepassword', 'PersonalInfo\ChangePasswordController@index');
+Route::post('/changepassword', 'PersonalInfo\ChangePasswordController@store');
 
 Auth::routes();
 //Route::get('/', 'HomeController@index');

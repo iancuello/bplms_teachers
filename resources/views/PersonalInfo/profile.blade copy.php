@@ -1147,8 +1147,8 @@ License: You must have a valid license purchased only from themeforest(the above
                 <div class="kt-form kt-form--label-right">
                     
 
-                    <form class="kt-form kt-form--label-right" action="{{ url('/changepassword') }}" method="POST" enctype="multipart/form-data" >
-                    {{-- <form class="kt-form kt-form--label-right"> --}}
+
+                    <form class="kt-form kt-form--label-right">
                     <div class="kt-portlet__body">
                         <div class="kt-section kt-section--first">
                             <div class="kt-section__body">
@@ -1169,7 +1169,6 @@ License: You must have a valid license purchased only from themeforest(the above
                                         <h3 class="kt-section__title kt-section__title-sm">Change Or Recover Your Password:</h3>
                                     </div>
                                 </div>
-                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <div class="form-group row">
                                     <label class="col-xl-3 col-lg-3 col-form-label">Current Password</label>
                                     <div class="col-lg-4 col-md-9 col-sm-12">

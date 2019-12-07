@@ -14,7 +14,7 @@ class ChangePasswordController extends Controller
      */
     public function index()
     {
-        return view('personalinfo.changepassword', compact('countries', 'teachers_profile'));  
+        return view('personalinfo.changepassword');  
     }
 
     /**
