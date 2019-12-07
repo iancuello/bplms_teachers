@@ -15,17 +15,14 @@ Route::get('/', function () {
     return view('Auth.login1');
 });
 
-
-
-
 //Route::get('/register', 'TeachersController@register');
 //Route::get('/register1', 'TeachersController@register1');
 //Route::get('register', 'HomeController@index');
 //Route::post('registersave', 'HomeController@store');
-Route::get('/profile', 'TeachersController@index');
-Route::post('/profile', 'TeachersController@store');
+Route::get('/profile', 'PersonalInfo\ProfileController@index');
+Route::post('/profile', 'PersonalInfo\ProfileController@store');
 
-Route::get('/changepassword', 'TeachersController@index');
+Route::get('/changepassword', 'PersonalInfo\ChangePasswordController@index');
 
 Auth::routes();
 //Route::get('/', 'HomeController@index');

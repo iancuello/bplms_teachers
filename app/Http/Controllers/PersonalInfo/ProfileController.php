@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\PersonalInfo;
 
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 use App\Country;
 use App\TeachersProfile;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
 use Carbon\Carbon;
@@ -13,7 +14,7 @@ use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 
 
-class TeachersController extends Controller
+class ProfileController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,15 +23,9 @@ class TeachersController extends Controller
      */
     public function index()
     {
-        // $countries = Country::all(); 
-        //return view('profile', compact('countries'));   
-        //dd($id);
-
-        $countries = Country::OrderByName()->get();      
-                  
+        $countries = Country::OrderByName()->get();                        
         $teachers_profile = TeachersProfile::getTeachersProfileByid(auth()->user()->id)->first();           
-        //dd($teachers_profile);     
-        return view('profile', compact('countries', 'teachers_profile'));  
+        return view('personalinfo.profile', compact('countries', 'teachers_profile'));  
     }
 
     /**

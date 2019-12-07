@@ -15,9 +15,8 @@ class ChangePasswordController extends Controller
     public function index()
     {
         //$countries = Country::OrderByName()->get();                
-        $teachers_profile = TeachersProfile::getTeachersProfileByid(auth()->user()->id)->first();           
-        //dd($teachers_profile);     
-        return view('profile', compact('countries', 'teachers_profile'));  
+        //$teachers_profile = TeachersProfile::getTeachersProfileByid(auth()->user()->id)->first();           
+        return view('changepassword', compact('countries', 'teachers_profile'));  
     }
 
     /**
