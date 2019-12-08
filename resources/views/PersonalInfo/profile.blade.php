@@ -775,7 +775,9 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- end:: Subheader -->
 
 
-
+@php 
+    $active_tabpanel = session('tabpanel') ? session('tabpanel') : 'Profile';    
+@endphp
 
 <!-- begin:: Content -->
 <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
@@ -784,7 +786,9 @@ License: You must have a valid license purchased only from themeforest(the above
     <div class="kt-portlet__head-toolbar">
         <ul class="nav nav-tabs nav-tabs-space-xl nav-tabs-line nav-tabs-bold nav-tabs-line-3x nav-tabs-line-brand" role="tablist">
             <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#kt_user_edit_tab_1" role="tab">
+
+                <a class="nav-link {{$active_tabpanel == "Profile" ? 'active' : '' }}" data-toggle="tab" href="#kt_user_edit_tab_1" role="tab">
+
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                             <polygon id="Shape" points="0 0 24 0 24 24 0 24"/>
@@ -796,7 +800,7 @@ License: You must have a valid license purchased only from themeforest(the above
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#kt_user_edit_tab_5" role="tab">
+                <a class="nav-link {{$active_tabpanel == "Education" ? 'active' : '' }}" data-toggle="tab" href="#kt_user_edit_tab_5" role="tab">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                             <rect id="bound" x="0" y="0" width="24" height="24"/>
@@ -810,7 +814,7 @@ License: You must have a valid license purchased only from themeforest(the above
             
             
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#kt_user_edit_tab_1" role="tab">
+                <a class="nav-link {{$active_tabpanel == "Work Experience" ? 'active' : '' }}" data-toggle="tab" href="#kt_user_edit_tab_1" role="tab">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                             <rect id="bound" x="0" y="0" width="24" height="24"/>
@@ -824,7 +828,7 @@ License: You must have a valid license purchased only from themeforest(the above
             
             
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#kt_user_edit_tab_2" role="tab">
+                <a class="nav-link {{$active_tabpanel == "Account" ? 'active' : '' }}" data-toggle="tab" href="#kt_user_edit_tab_2" role="tab">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                             <rect id="bound" x="0" y="0" width="24" height="24"/>
@@ -834,7 +838,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#kt_user_edit_tab_3" role="tab">
+                <a class="nav-link {{$active_tabpanel == "Change Password" ? 'active' : '' }}" data-toggle="tab" href="#kt_user_edit_tab_3" role="tab">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
     <rect id="bound" x="0" y="0" width="24" height="24"/>
@@ -846,7 +850,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#kt_user_edit_tab_4" role="tab">
+                <a class="nav-link {{$active_tabpanel == "Settings" ? 'active' : '' }}" data-toggle="tab" href="#kt_user_edit_tab_4" role="tab">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                             <rect id="bound" x="0" y="0" width="24" height="24"/>
@@ -863,7 +867,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <div class="kt-portlet__body">
     
         <div class="tab-content">
-            <div class="tab-pane active" id="kt_user_edit_tab_1" role="tabpanel">
+            <div class="tab-pane {{$active_tabpanel == "Profile" ? 'active' : '' }}" id="kt_user_edit_tab_1" role="tabpanel">
             <form class="kt-form kt-form--label-right" action="{{ url('/profile') }}" method="POST" enctype="multipart/form-data" >
                 <div class="kt-form kt-form--label-right">
                     <div class="kt-form__body">
@@ -1143,10 +1147,10 @@ License: You must have a valid license purchased only from themeforest(the above
             
 
 
-            <div class="tab-pane" id="kt_user_edit_tab_3" role="tabpanel">
+            <div class="tab-pane {{$active_tabpanel == "Change Password" ? 'active' : '' }}" id="kt_user_edit_tab_3" role="tabpanel">
                 <div class="kt-form kt-form--label-right">
                     
-
+                    {{-- <div class="tab-pane active" id="kt_user_edit_tab_1" role="tabpanel"> --}}
                     <form class="kt-form kt-form--label-right" action="{{ url('/changepassword') }}" method="POST" enctype="multipart/form-data" >
                     {{-- <form class="kt-form kt-form--label-right"> --}}
                     <div class="kt-portlet__body">
@@ -1476,7 +1480,6 @@ License: You must have a valid license purchased only from themeforest(the above
 </div>	
 </div>
 <!-- end:: Content -->
-
 
 				<!-- begin:: Footer -->
 <div class="kt-footer  kt-grid__item" id="kt_footer">

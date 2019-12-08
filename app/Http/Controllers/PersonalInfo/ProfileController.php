@@ -94,7 +94,7 @@ class ProfileController extends Controller
             'avatar' => $filename,
         ]);
         
-        return redirect('/profile');
+        return redirect('/profile')->with('tabpanel', 'Profile');
 
         //TeachersProfile::create($validator);
         // $teacher = new TeachersProfile;

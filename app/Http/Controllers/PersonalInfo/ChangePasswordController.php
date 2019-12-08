@@ -34,8 +34,11 @@ class ChangePasswordController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {   
+        $tabpanel = 'Change Password';
+        //dd($tabpanel);
+        //return redirect('/profile')->with('tabpanel', $tabpanel);
+        return redirect('/profile')->with('tabpanel', 'Change Password');
     }
 
     /**
