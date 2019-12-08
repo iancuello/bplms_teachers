@@ -5,6 +5,12 @@ namespace App\Http\Controllers\personalinfo;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use Auth;
+use Hash;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Input;
+
+
 class ChangePasswordController extends Controller
 {
     /**
@@ -35,8 +41,29 @@ class ChangePasswordController extends Controller
      */
     public function store(Request $request)
     {   
-        $tabpanel = 'Change Password';
-        //dd($tabpanel);
+
+        if (!(Hash::check($request->get('current-password'), Auth::user()->password))) {
+            // The passwords matches
+            //dd('n cp');
+            return redirect()->back()->with("password-error","Your current password does not matches with the password you provided. <br>Please try again.");
+        }
+
+        if(strcmp($request->get('current-password'), $request->get('new-password')) == 0){
+            //Current password and new password are same
+            return redirect()->back()->with("password-error","New Password cannot be same as your current password. <br>Please choose a different password.");
+        }
+
+        $validator = Validator::make($request->all(), [
+             'current-password' => 'required',
+             'new-password' => 'required|string|min:6|confirmed',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('/profile')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
         //return redirect('/profile')->with('tabpanel', $tabpanel);
         return redirect('/profile')->with('tabpanel', 'Change Password');
     }

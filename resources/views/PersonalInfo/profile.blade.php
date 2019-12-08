@@ -1146,27 +1146,44 @@ License: You must have a valid license purchased only from themeforest(the above
             </div>
             
 
-
+            {{-- 
+                References: 
+                https://github.com/5balloons/change-password-laravel/blob/master/app/Http/Controllers/HomeController.php 
+                https://github.com/5balloons/change-password-laravel/blob/master/resources/views/auth/changepassword.blade.php
+            --}}
             <div class="tab-pane {{$active_tabpanel == "Change Password" ? 'active' : '' }}" id="kt_user_edit_tab_3" role="tabpanel">
                 <div class="kt-form kt-form--label-right">
                     
                     {{-- <div class="tab-pane active" id="kt_user_edit_tab_1" role="tabpanel"> --}}
-                    <form class="kt-form kt-form--label-right" action="{{ url('/changepassword') }}" method="POST" enctype="multipart/form-data" >
+                    <form class="kt-form kt-form--label-right" action="{{ url('/changepassword') }}" method="POST" >
                     {{-- <form class="kt-form kt-form--label-right"> --}}
                     <div class="kt-portlet__body">
                         <div class="kt-section kt-section--first">
                             <div class="kt-section__body">
+
+                                @if (session('password-error'))
                                     <div class="alert alert-solid-danger alert-bold fade show kt-margin-t-20 kt-margin-b-40" role="alert">
-                                            <div class="alert-icon"><i class="fa fa-exclamation-triangle"></i></div>
-                                            <div class="alert-text">Configure user passwords to expire periodically. Users will need warning that their passwords are going to expire, <br>or they might inadvertently get locked out of the system!</div>
-                                            <div class="alert-close">
-                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                    <span aria-hidden="true"><i class="la la-close"></i></span>
-                                                </button>
-                                            </div>
+                                        <div class="alert-icon"><i class="fa fa-exclamation-triangle"></i></div>
+                                        <div class="alert-text">{!! session('password-error') !!}</div>
+                                        {{-- <div class="alert-text">Configure user passwords to expire periodically. Users will need warning that their passwords are going to expire, <br>or they might inadvertently get locked out of the system!</div> --}}
+                                        <div class="alert-close">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true"><i class="la la-close"></i></span>
+                                            </button>
                                         </div>
+                                    </div>                                
+                                @endif
 
-
+                                {{-- <div class="alert alert-solid-danger alert-bold fade show kt-margin-t-20 kt-margin-b-40" role="alert">
+                                    <div class="alert-icon"><i class="fa fa-exclamation-triangle"></i></div>
+                                    <div class="alert-text">Configure user passwords to expire periodically. Users will need warning that their passwords are going to expire, <br>or they might inadvertently get locked out of the system!</div>
+                                    <div class="alert-close">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true"><i class="la la-close"></i></span>
+                                        </button>
+                                    </div>
+                                </div> --}}
+3
                                 <div class="row">
                                     <label class="col-xl-3"></label>
                                     <div class="col-lg-9 col-xl-6">
@@ -1174,35 +1191,45 @@ License: You must have a valid license purchased only from themeforest(the above
                                     </div>
                                 </div>
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+                                {{-- <div class="form-group row">
+                                    <label class="col-form-label col-lg-3 col-sm-12">First Name</label>
+                                    <div class="col-lg-4 col-md-9 col-sm-12">
+                                        <input id="firstname" name="firstname" type="text" placeholder="First Name" value="{{!empty($teachers_profile) ? $teachers_profile->firstname : old('firstname') }}"
+                                               class="{{ $errors->has('firstname') ? 'form-control is-invalid' : 'form-control'}}">                                                
+
+                                        @if ($errors->has('firstname'))
+                                            <div id="firstname-error" class="error invalid-feedback">{{ $errors->first('firstname') }}</div>
+                                        @endif                                        
+                                    </div>
+                                </div> --}}
+
                                 <div class="form-group row">
                                     <label class="col-xl-3 col-lg-3 col-form-label">Current Password</label>
                                     <div class="col-lg-4 col-md-9 col-sm-12">
-                                        <input type="password" class="form-control" value="" placeholder="Current password">
-                                        <a href="#" class="kt-link kt-font-sm kt-font-bold kt-margin-t-5">Forgot password ?</a>
+                                        <input id="current-password" name="current-password" type="password" value="old('current-password')" placeholder="Current password"
+                                        class="{{ $errors->has('current-password') ? 'form-control is-invalid' : 'form-control'}}">     
+                                        {{-- <a href="#" class="kt-link kt-font-sm kt-font-bold kt-margin-t-5">Forgot password ?</a> --}}
+
+                                        @if ($errors->has('current-password'))
+                                            <div id="current-password-error" class="error invalid-feedback">{{ $errors->first('current-password') }}</div>
+                                        @endif                                        
+
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
                                     <label class="col-xl-3 col-lg-3 col-form-label">New Password</label>
                                     <div class="col-lg-4 col-md-9 col-sm-12">
-                                        <input type="password" class="form-control" value="" placeholder="New password">
+                                        <input id="new-password" name="new-password" type="password" class="form-control" value="old('new-password')" placeholder="New password">
                                     </div>
                                 </div>
                                 <div class="form-group form-group-last row">
                                     <label class="col-xl-3 col-lg-3 col-form-label">Verify Password</label>
                                     <div class="col-lg-4 col-md-9 col-sm-12">
-                                        <input type="password" class="form-control" value="" placeholder="Verify password">
+                                        <input id="new-password-confirm" name="new-password-confirm" type="password" class="form-control" value="old('new-password-confirm')" placeholder="Verify password">
                                     </div>
                                 </div>                                       
-
-
-
-
-
-
-                                
-
-
 
                             </div>
                         </div>
