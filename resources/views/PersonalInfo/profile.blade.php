@@ -776,7 +776,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
 
 @php 
-    $active_tabpanel = session('tabpanel') ? session('tabpanel') : 'Profile';    
+    $active_tabpanel = session('tabpanel') ? session('tabpanel') : 'Profile';        
 @endphp
 
 <!-- begin:: Content -->
@@ -1119,14 +1119,6 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </div>                                               
 
 
-
-
-
-
-                            
-
-
-
                         </div>
                     </div>
                 </div>
@@ -1183,7 +1175,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                         </button>
                                     </div>
                                 </div> --}}
-3
+
                                 <div class="row">
                                     <label class="col-xl-3"></label>
                                     <div class="col-lg-9 col-xl-6">
@@ -1209,8 +1201,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <div class="col-lg-4 col-md-9 col-sm-12">
                                         <input id="current-password" name="current-password" type="password" value="old('current-password')" placeholder="Current password"
                                         class="{{ $errors->has('current-password') ? 'form-control is-invalid' : 'form-control'}}">     
-                                        {{-- <a href="#" class="kt-link kt-font-sm kt-font-bold kt-margin-t-5">Forgot password ?</a> --}}
-
+                                        
                                         @if ($errors->has('current-password'))
                                             <div id="current-password-error" class="error invalid-feedback">{{ $errors->first('current-password') }}</div>
                                         @endif                                        
@@ -1221,7 +1212,14 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <div class="form-group row">
                                     <label class="col-xl-3 col-lg-3 col-form-label">New Password</label>
                                     <div class="col-lg-4 col-md-9 col-sm-12">
-                                        <input id="new-password" name="new-password" type="password" class="form-control" value="old('new-password')" placeholder="New password">
+                                            {{-- value="{{!empty($teachers_profile) ? $teachers_profile->middlename : old('middlename') }}" --}}
+                                        <input id="new-password" name="new-password" type="password" class="form-control" value="old('new-password')" placeholder="New password"
+                                        class="{{ $errors->has('new-password') ? 'form-control is-invalid' : 'form-control'}}">     
+
+                                        @if ($errors->has('new-password'))
+                                            <div id="new-password-error" class="error invalid-feedback">{{ $errors->first('new-password') }}</div>
+                                        @endif                                        
+
                                     </div>
                                 </div>
                                 <div class="form-group form-group-last row">

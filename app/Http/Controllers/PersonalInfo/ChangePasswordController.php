@@ -19,7 +19,11 @@ class ChangePasswordController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   
+        //Auth::user()->password))    
+        //$teachers_profile = TeachersProfile::getTeachersProfileByid(auth()->user()->id)->first();           
+        //return view('personalinfo.profile', compact('countries', 'teachers_profile'));  
+
         return view('personalinfo.changepassword');  
     }
 
@@ -41,31 +45,34 @@ class ChangePasswordController extends Controller
      */
     public function store(Request $request)
     {   
-
-        if (!(Hash::check($request->get('current-password'), Auth::user()->password))) {
-            // The passwords matches
-            //dd('n cp');
-            return redirect()->back()->with("password-error","Your current password does not matches with the password you provided. <br>Please try again.");
-        }
-
-        if(strcmp($request->get('current-password'), $request->get('new-password')) == 0){
-            //Current password and new password are same
-            return redirect()->back()->with("password-error","New Password cannot be same as your current password. <br>Please choose a different password.");
-        }
-
         $validator = Validator::make($request->all(), [
              'current-password' => 'required',
-             'new-password' => 'required|string|min:6|confirmed',
+             'new-password' => 'required|string|min:6|confirmed|different:current-password',
         ]);
 
         if ($validator->fails()) {
             return redirect('/profile')
                         ->withErrors($validator)
-                        ->withInput();
+                        ->with('tabpanel', 'Change Password');
+        } else {
+            //return redirect('/profile')->with('tabpanel', $tabpanel);
+            return redirect('/profile')->with('tabpanel', 'Change Password');
         }
 
-        //return redirect('/profile')->with('tabpanel', $tabpanel);
-        return redirect('/profile')->with('tabpanel', 'Change Password');
+        if (!(Hash::check($request->input('current-password'), Auth::user()->password))) {
+            // The passwords matches
+            return redirect()->back()
+                             ->with("password-error","Your current password does not matches with the password you provided. <br>Please try again.")
+                             ->with("tabpanel","Change Password");
+        }
+        
+        if(strcmp($request->input('current-password'), $request->input('new-password')) == 0){
+            //Current password and new password are same
+            return redirect()->back()
+                             ->with("password-error","New Password cannot be same as your current password. <br>Please choose a different password.")
+                             ->with("tabpanel","Change Password");
+        }
+
     }
 
     /**
