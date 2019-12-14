@@ -56,10 +56,18 @@ class ChangePasswordController extends Controller
     public function store(Request $request)
     {   
          
+        if (!(Hash::check($request->get('current_password'), Auth::user()->password))) {
+            // The passwords matches
+            return redirect()->back()
+                             ->with("password-error","Your current password does not matches with the password you provided. <br>Please try again.")
+                             ->with("tabpanel","Change Password")
+                             ->withInput();
+        }
+
         $validator = Validator::make($request->all(), [
-            'currentpassword' => 'required',     
-            'newpassword' => 'required|string|min:6|different:currentpassword|same:new-password-confirm',            
-            'new-password-confirm' => 'required|string|min:6',
+            'current_password' => 'required',     
+            'new_password' => 'required|string|min:6|different:currentpassword|same:new_password_confirm',            
+            'new_password_confirm' => 'required|string|min:6',
         ]);
 
         if ($validator->fails()) {
@@ -69,40 +77,17 @@ class ChangePasswordController extends Controller
                                 ->withInput();
         } 
 
-        if (!(Hash::check($request->get('currentpassword'), Auth::user()->password))) {
-            // The passwords matches
-            return redirect()->back()
-                             ->with("password-error","Your current password does not matches with the password you provided. <br>Please try again.")
-                             ->with("tabpanel","Change Password")
-                             ->withInput();
-        }
         
-        if(strcmp($request->get('currentpassword'), $request->get('newpassword')) == 0){
-            //Current password and new password are same
-            return redirect()->back()
-                             ->with("password-error","New Password cannot be same as your current password. <br>Please choose a different password.")
-                             ->with("tabpanel","Change Password")
-                             ->withInput();
-        }
+        //Change Password
+        $user = Auth::user();
+        $user->password = bcrypt($request->get('newpassword'));
+        $user->save();
 
-        
-        // //'confirmed|min:6|different:current-password',
-        // // /|string|min:6|confirmed|different:current-password
-        // //dd($request->input('current-password'));
-        // //$request->input('firstname'),
-        
-        // ->with('tabpanel', 'Change Password')
-        
-        // else {
-        //     return redirect('/profile')->with('tabpanel', 'Change Password');
-        // }
-        
+        return redirect()->back()
+                       ->with('tabpanel', 'Change Password')
+                       ->withInput();
 
-        
-        //return redirect('/profile')->with('tabpanel', $tabpanel);
-        
-        
-        //User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
+        // return redirect()->back()->with("success","Password changed successfully !");                       
     }
 
     /**

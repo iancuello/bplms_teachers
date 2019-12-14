@@ -1184,26 +1184,14 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </div>
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-                                {{-- <div class="form-group row">
-                                    <label class="col-form-label col-lg-3 col-sm-12">First Name</label>
-                                    <div class="col-lg-4 col-md-9 col-sm-12">
-                                        <input id="firstname" name="firstname" type="text" placeholder="First Name" value="{{!empty($teachers_profile) ? $teachers_profile->firstname : old('firstname') }}"
-                                               class="{{ $errors->has('firstname') ? 'form-control is-invalid' : 'form-control'}}">                                                
-
-                                        @if ($errors->has('firstname'))
-                                            <div id="firstname-error" class="error invalid-feedback">{{ $errors->first('firstname') }}</div>
-                                        @endif                                        
-                                    </div>
-                                </div> --}}
-
                                 <div class="form-group row">
                                     <label class="col-xl-3 col-lg-3 col-form-label">Current Password</label>
                                     <div class="col-lg-4 col-md-9 col-sm-12">
-                                        <input id="currentpassword" name="currentpassword" type="text" value="{{ old('currentpassword') }}" placeholder="Current password"
-                                        class="{{ $errors->has('currentpassword') ? 'form-control is-invalid' : 'form-control'}}">     
+                                        <input id="current_password" name="current_password" type="password" value="{{ old('current_password') }}" placeholder="Current password"
+                                        class="{{ $errors->has('current_password') ? 'form-control is-invalid' : 'form-control'}}">     
                                         
-                                        @if ($errors->has('currentpassword'))
-                                            <div id="currentpassword-error" class="error invalid-feedback">{{ $errors->first('currentpassword') }}</div>
+                                        @if ($errors->has('current_password'))
+                                            <div id="current_password-error" class="error invalid-feedback">{{ $errors->first('current_password') }}</div>
                                         @endif                                        
 
                                     </div>
@@ -1212,11 +1200,11 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <div class="form-group row">
                                     <label class="col-xl-3 col-lg-3 col-form-label">New Password</label>
                                     <div class="col-lg-4 col-md-9 col-sm-12">                                            
-                                        <input id="newpassword" name="newpassword" type="text" value="{{ old('newpassword') }}" placeholder="New password"
-                                        class="{{ $errors->has('newpassword') ? 'form-control is-invalid' : 'form-control'}}">     
+                                        <input id="new_password" name="new_password" type="password" value="{{ old('new_password') }}" placeholder="New password"
+                                        class="{{ $errors->has('new_password') ? 'form-control is-invalid' : 'form-control'}}">     
 
-                                        @if ($errors->has('newpassword'))
-                                            <div id="newpassword-error" class="error invalid-feedback">{{ $errors->first('newpassword') }}</div>
+                                        @if ($errors->has('new_password'))
+                                            <div id="new_password-error" class="error invalid-feedback">{{ $errors->first('new_password') }}</div>
                                         @endif                                        
 
                                     </div>
@@ -1226,7 +1214,13 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <div class="form-group form-group-last row">
                                     <label class="col-xl-3 col-lg-3 col-form-label">Verify Password</label>
                                     <div class="col-lg-4 col-md-9 col-sm-12">
-                                        <input id="new-password-confirm" name="new-password-confirm" type="text" class="form-control" value="{{ old('new-password-confirm') }}" placeholder="Verify password">
+                                        <input id="new_password_confirm" name="new_password_confirm" type="password"  value="{{ old('new_password_confirm') }}" placeholder="Verify password"
+                                        class="{{ $errors->has('new_password_confirm') ? 'form-control is-invalid' : 'form-control'}}">     
+
+                                        @if ($errors->has('new_password_confirm'))
+                                            <div id="new_password_confirm-error" class="error invalid-feedback">{{ $errors->first('new_password_confirm') }}</div>
+                                        @endif                                        
+
                                     </div>
                                 </div>                                       
 
