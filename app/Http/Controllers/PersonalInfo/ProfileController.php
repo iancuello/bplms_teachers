@@ -5,6 +5,7 @@ namespace App\Http\Controllers\PersonalInfo;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use Auth;
 use App\Country;
 use App\TeachersProfile;
 use Illuminate\Support\Facades\Validator;
@@ -22,7 +23,8 @@ class ProfileController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   
+        //dd( Auth::user()->password);
         $countries = Country::OrderByName()->get();                        
         $teachers_profile = TeachersProfile::getTeachersProfileByid(auth()->user()->id)->first();           
         return view('personalinfo.profile', compact('countries', 'teachers_profile'));  
@@ -52,7 +54,6 @@ class ProfileController extends Controller
             'lastname' => 'required|string|max:190',
             'birthdate' => 'required|date',
             'country' => 'required|integer',
-            
         ]);
 
         if ($validator->fails()) {

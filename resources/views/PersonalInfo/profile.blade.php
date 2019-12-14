@@ -1059,7 +1059,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <label class="col-form-label col-lg-3 col-sm-12">Username</label>
                                 <div class="col-lg-4 col-md-9 col-sm-12">
                                     {{-- <div class="kt-spinner kt-spinner--sm kt-spinner--success kt-spinner--right kt-spinner--input"> --}}
-                                        <input class="form-control" type="text" value="nick84">
+                                        <input class="form-control" type="text" value="{{ Auth::user()->name }}">
                                     {{-- </div> --}}
 
 
@@ -1072,14 +1072,14 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <div class="input-group">
                                         <div class="input-group-prepend"><span class="input-group-text"><i class=" flaticon-multimedia-2
                                             "></i></span></div>
-                                        <input type="email" class="form-control" value="nick.watson@loop.com" placeholder="Email" aria-describedby="basic-addon1">
+                                        <input type="email" class="form-control" value="{{ Auth::user()->email }}" placeholder="Email" aria-describedby="basic-addon1">
                                     </div>
                                     <span class="form-text text-muted">We'll never share your email with anyone else.</span>
                                 </div>
                             </div>
 
 
-                            <div class="row">
+                            {{-- <div class="row">
                                     <label class="col-xl-3"></label>
                                     <div class="col-lg-4 col-md-9 col-sm-12">
                                         <h3 class="kt-section__title kt-section__title-sm">Security:</h3>
@@ -1116,7 +1116,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <div class="col-lg-9 col-xl-6">
                                         <button type="button" class="btn btn-label-danger btn-bold btn-sm kt-margin-t-5 kt-margin-b-5">Deactivate your account ?</button>
                                     </div>
-                                </div>                                               
+                                </div>                                                --}}
 
 
                         </div>
@@ -1128,8 +1128,8 @@ License: You must have a valid license purchased only from themeforest(the above
                             <div class="col-lg-3 col-xl-3">
                             </div>
                             <div class="col-lg-9 col-xl-9">
-                                <button type="reset" class="btn btn-success">Submit</button>&nbsp;
-                                <button type="reset" class="btn btn-secondary">Cancel</button>
+                                <button type="reset" class="btn btn-success">Save Changes</button>&nbsp;
+                                {{-- <button type="reset" class="btn btn-secondary">Cancel</button> --}}
                             </div>
                         </div>
                     </div>
@@ -1147,7 +1147,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 <div class="kt-form kt-form--label-right">
                     
                     {{-- <div class="tab-pane active" id="kt_user_edit_tab_1" role="tabpanel"> --}}
-                    <form class="kt-form kt-form--label-right" action="{{ url('/changepassword') }}" method="POST" >
+                    <form class="kt-form kt-form--label-right" action="{{ url('/changepassword') }}" method="POST" enctype="multipart/form-data">
                     {{-- <form class="kt-form kt-form--label-right"> --}}
                     <div class="kt-portlet__body">
                         <div class="kt-section kt-section--first">
@@ -1199,11 +1199,11 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <div class="form-group row">
                                     <label class="col-xl-3 col-lg-3 col-form-label">Current Password</label>
                                     <div class="col-lg-4 col-md-9 col-sm-12">
-                                        <input id="current-password" name="current-password" type="password" value="old('current-password')" placeholder="Current password"
-                                        class="{{ $errors->has('current-password') ? 'form-control is-invalid' : 'form-control'}}">     
+                                        <input id="currentpassword" name="currentpassword" type="text" value="{{ old('currentpassword') }}" placeholder="Current password"
+                                        class="{{ $errors->has('currentpassword') ? 'form-control is-invalid' : 'form-control'}}">     
                                         
-                                        @if ($errors->has('current-password'))
-                                            <div id="current-password-error" class="error invalid-feedback">{{ $errors->first('current-password') }}</div>
+                                        @if ($errors->has('currentpassword'))
+                                            <div id="currentpassword-error" class="error invalid-feedback">{{ $errors->first('currentpassword') }}</div>
                                         @endif                                        
 
                                     </div>
@@ -1211,21 +1211,22 @@ License: You must have a valid license purchased only from themeforest(the above
 
                                 <div class="form-group row">
                                     <label class="col-xl-3 col-lg-3 col-form-label">New Password</label>
-                                    <div class="col-lg-4 col-md-9 col-sm-12">
-                                            {{-- value="{{!empty($teachers_profile) ? $teachers_profile->middlename : old('middlename') }}" --}}
-                                        <input id="new-password" name="new-password" type="password" class="form-control" value="old('new-password')" placeholder="New password"
-                                        class="{{ $errors->has('new-password') ? 'form-control is-invalid' : 'form-control'}}">     
+                                    <div class="col-lg-4 col-md-9 col-sm-12">                                            
+                                        <input id="newpassword" name="newpassword" type="text" value="{{ old('newpassword') }}" placeholder="New password"
+                                        class="{{ $errors->has('newpassword') ? 'form-control is-invalid' : 'form-control'}}">     
 
-                                        @if ($errors->has('new-password'))
-                                            <div id="new-password-error" class="error invalid-feedback">{{ $errors->first('new-password') }}</div>
+                                        @if ($errors->has('newpassword'))
+                                            <div id="newpassword-error" class="error invalid-feedback">{{ $errors->first('newpassword') }}</div>
                                         @endif                                        
 
                                     </div>
                                 </div>
+
+
                                 <div class="form-group form-group-last row">
                                     <label class="col-xl-3 col-lg-3 col-form-label">Verify Password</label>
                                     <div class="col-lg-4 col-md-9 col-sm-12">
-                                        <input id="new-password-confirm" name="new-password-confirm" type="password" class="form-control" value="old('new-password-confirm')" placeholder="Verify password">
+                                        <input id="new-password-confirm" name="new-password-confirm" type="text" class="form-control" value="{{ old('new-password-confirm') }}" placeholder="Verify password">
                                     </div>
                                 </div>                                       
 
@@ -1244,24 +1245,10 @@ License: You must have a valid license purchased only from themeforest(the above
                         </div>
                     </div>
                 </form>
-
-
-                    
-                    {{-- <div class="kt-separator kt-separator--space-lg kt-separator--fit kt-separator--border-solid"></div>
-                        
-                    <div class="kt-form__actions">
-                        <div class="row">
-                            <div class="col-xl-3"></div>
-                            <div class="col-lg-9 col-xl-6">
-                                <a href="#" class="btn btn-label-brand btn-bold">Save changes</a>
-                                <a href="#" class="btn btn-clean btn-bold">Cancel</a>
-                            </div>
-                        </div>
-                    </div> --}}
-                </div>
             </div>
+        </div>
 
-            <div class="tab-pane" id="kt_user_edit_tab_4" role="tabpanel">
+            {{-- <div class="tab-pane" id="kt_user_edit_tab_4" role="tabpanel">
                 <div class="kt-form kt-form--label-right">
                     <div class="kt-form__body">
                         <div class="kt-section kt-section--first">
@@ -1389,14 +1376,14 @@ License: You must have a valid license purchased only from themeforest(the above
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
 
 
 
 
             <!--start: kt_user_edit_tab_5 -->
-            <div class="tab-pane" id="kt_user_edit_tab_5" role="tabpanel">
+            {{-- <div class="tab-pane" id="kt_user_edit_tab_5" role="tabpanel">
             <div class="kt-form kt-form--label-right">
                 <form class="kt-form kt-form--label-right">
                 <div class="kt-portlet__body">
@@ -1475,7 +1462,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <button type="reset" class="btn btn-secondary">Cancel</button>											</div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </form>
 
 
